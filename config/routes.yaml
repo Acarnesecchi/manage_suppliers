@@ -2,6 +2,12 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-supplier:
-  path: /supplier
-  controller: App\Controller\SupplierController::supp
+create_supplier:
+    path: /supplier
+    controller: App\Controller\SupplierController::create
+    methods: [GET, POST]
+
+index_supplier:
+    path: /supplier/index
+    controller: App\Controller\SupplierController::index
+    methods: [GET]

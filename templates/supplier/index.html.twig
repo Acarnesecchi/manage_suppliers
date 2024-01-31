@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Check All Our Suppliers{% endblock %}
+
+{% block body %}
+<h2 class="text-center my-4">Our Suppliers</h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact Number</th>
+            <th>Active</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for supplier in suppliers %}
+        <tr>
+            <td>{{ supplier.type.name }}
+            <td>{{ supplier.name }}</td>
+            <td>{{ supplier.mail }}</td>
+            <td>{{ supplier.number }}</td>
+            <td>{{ supplier.active ? 'Yes' : 'No' }}</td>
+            <td>{{ supplier.description }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="9" class="text-center">No suppliers found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
