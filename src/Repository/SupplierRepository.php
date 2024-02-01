@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Supplier;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\SupplierEnum;
 
 /**
  * @extends ServiceEntityRepository<Supplier>
@@ -36,9 +37,23 @@ class SupplierRepository extends ServiceEntityRepository
 
     public function findByType(int $type): array
     {
+        $entityManager = $this->getEntityManager();
+
+        $supplierEnumQuery = $entityManager->createQuery(
+            'SELECT s
+            FROM App\Entity\SupplierEnum s
+            WHERE s.id = :type'
+        )->setParameter('type', $type);
+
+        $supplierEnum = $supplierEnumQuery->getOneOrNullResult();
+
+        if (!$supplierEnum) {
+            return [];
+        }
+
         return $this->createQueryBuilder('s')
             ->where('s.type = :type')
-            ->setParameter('type', $type)
+            ->setParameter('type', $supplierEnum)
             ->getQuery()
             ->getResult();
     }

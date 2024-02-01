@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Supplier;
 use App\Form\SupplierType;
+use App\Entity\SupplierEnum;
 use App\Repository\SupplierRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
