@@ -21,6 +21,20 @@ class SupplierRepository extends ServiceEntityRepository
         parent::__construct($registry, Supplier::class);
     }
 
+    public function findAllActive(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s
+            FROM App\Entity\Supplier s
+            WHERE s.active = true
+            ORDER BY s.name ASC'
+        );
+
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Supplier[] Returns an array of Supplier objects
 //     */

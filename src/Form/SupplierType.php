@@ -16,14 +16,18 @@ class SupplierType extends AbstractType
             ->add('mail')
             ->add('number')
             ->add('type')
-            ->add('description')
-        ;
+            ->add('description');
+
+        if ($options['include_active']) {
+            $builder->add('active');
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Supplier::class,
+            'include_active' => false,
         ]);
     }
 }
