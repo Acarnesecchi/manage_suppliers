@@ -39,6 +39,12 @@ class SupplierController extends AbstractController
         $filter = $request->query->get('filter');
         if ($filter === 'active') {
             $suppliers = $supplierRepository->findAllActive();
+        } else if ($filter === 'hotel') {
+            $suppliers = $supplierRepository->findByType(1);
+        } else if ($filter === 'track') {
+            $suppliers = $supplierRepository->findByType(2);
+        } else if ($filter === 'complement') {
+            $suppliers = $supplierRepository->findByType(3);
         } else {
             $suppliers = $supplierRepository->findAll();
         }

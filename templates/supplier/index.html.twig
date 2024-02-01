@@ -10,6 +10,9 @@
     <select class="form-select" name="filter" onchange="this.form.submit()">
         <option value="all" {{ filter == 'all' ? 'selected' : '' }}>All Suppliers</option>
         <option value="active" {{ filter == 'active' ? 'selected' : '' }}>Active Suppliers</option>
+        <option value="hotel" {{ filter == 'hotel' ? 'selected' : '' }}>Show only Hotel suppliers</option>
+        <option value="track" {{ filter == 'track' ? 'selected' : '' }}>Show only Track suppliers</option>
+        <option value="complement" {{ filter == 'complement' ? 'selected' : '' }}>Show only Complement suppliers</option>
     </select>
 </form>
 

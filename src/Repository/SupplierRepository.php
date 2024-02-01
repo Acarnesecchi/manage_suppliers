@@ -28,11 +28,19 @@ class SupplierRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT s
             FROM App\Entity\Supplier s
-            WHERE s.active = true
-            ORDER BY s.name ASC'
+            WHERE s.active = true'
         );
 
         return $query->getResult();
+    }
+
+    public function findByType(int $type): array
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.type = :type')
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**
