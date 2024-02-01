@@ -2,12 +2,22 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-create_supplier:
-    path: /supplier
+app_supplier_create:
+    path: /supplier/add
     controller: App\Controller\SupplierController::create
     methods: [GET, POST]
 
-index_supplier:
-    path: /supplier/index
+app_supplier_index:
+    path: /supplier
     controller: App\Controller\SupplierController::index
+    methods: [GET]
+
+app_supplier_update:
+    path: /supplier/update/{id}
+    controller: App\Controller\SupplierController::update
+    methods: [GET, POST]
+
+app_supplier_delete:
+    path: /supplier/delete/{id}
+    controller: App\Controller\SupplierController::delete
     methods: [GET]

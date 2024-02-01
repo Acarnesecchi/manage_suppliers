@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Supplier;
 use App\Form\SupplierType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,5 +41,49 @@ class SupplierController extends AbstractController
         return $this->render('supplier/index.html.twig', [
             'suppliers' => $suppliers,
         ]);
+    }
+
+    public function update(Request $request, ManagerRegistry $doctrine, int $id): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $supplier = $entityManager->getRepository(Supplier::class)->find($id);
+
+        if (!$supplier) {
+            throw $this->createNotFoundException(
+                'No supplier found for id '.$id
+            );
+        }
+
+        $form = $this->createForm(SupplierType::class, $supplier);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $supplier->setUpdatedAt(new \DateTimeImmutable());
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_supplier_index');
+        }
+        return $this->render('supplier/update.html.twig', [
+            'form' => $form->createView(),
+            'supplier' => $supplier,
+        ]);
+    }
+
+    public function delete(ManagerRegistry $doctrine, int $id): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $supplier = $entityManager->getRepository(Supplier::class)->find($id);
+
+        if (!$supplier) {
+            throw $this->createNotFoundException(
+                'No supplier found for id '.$id
+            );
+        }
+
+        $entityManager->remove($supplier);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_supplier_index');
     }
 }
