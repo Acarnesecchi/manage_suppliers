@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Supplier;
 use App\Form\SupplierType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\SupplierRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,12 +34,18 @@ class SupplierController extends AbstractController
         ]);
     }
 
-    public function index(ManagerRegistry $doctrine): Response
-    {
-        $suppliers = $doctrine->getRepository(Supplier::class)->findAll();
+    public function index(ManagerRegistry $doctrine, Request $request, SupplierRepository $supplierRepository): Response
+    {   
+        $filter = $request->query->get('filter');
+        if ($filter === 'active') {
+            $suppliers = $supplierRepository->findAllActive();
+        } else {
+            $suppliers = $supplierRepository->findAll();
+        }
 
         return $this->render('supplier/index.html.twig', [
             'suppliers' => $suppliers,
+            'filter' => $filter,
         ]);
     }
 
@@ -54,7 +60,9 @@ class SupplierController extends AbstractController
             );
         }
 
-        $form = $this->createForm(SupplierType::class, $supplier);
+        $form = $this->createForm(SupplierType::class, $supplier, [
+            'include_active' => true,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

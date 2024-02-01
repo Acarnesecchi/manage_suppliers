@@ -1,0 +1,90 @@
+.btn-edit {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-save {
+    background-color: #ffef10;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-back {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    float: right;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-create {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    float: right;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.table-custom {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-custom td, .table-custom th {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.form-wrapper {
+    width: 100%;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ddd;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Add more custom styles as needed */

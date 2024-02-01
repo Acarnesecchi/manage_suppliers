@@ -3,9 +3,17 @@
 {% block title %}Check All Our Suppliers{% endblock %}
 
 {% block body %}
+<a href="{{ path('app_supplier_create') }}" class="btn btn-create">Add a New Supplier</a>
 <h2>Our Suppliers</h2>
 
-<table class="table table-bordered table-striped">
+<form method="get" action="{{ path('app_supplier_index') }}" class="mb-3">
+    <select class="form-select" name="filter" onchange="this.form.submit()">
+        <option value="all" {{ filter == 'all' ? 'selected' : '' }}>All Suppliers</option>
+        <option value="active" {{ filter == 'active' ? 'selected' : '' }}>Active Suppliers</option>
+    </select>
+</form>
+
+<table class="table table-custom">
     <thead class="thead-dark">
         <tr>
             <th>Type</th>
@@ -14,21 +22,26 @@
             <th>Contact Number</th>
             <th>Active</th>
             <th>Description</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         {% for supplier in suppliers %}
         <tr>
-            <td>{{ supplier.type.name }}
+            <td>{{ supplier.type.name }}</td>
             <td>{{ supplier.name }}</td>
             <td>{{ supplier.mail }}</td>
             <td>{{ supplier.number }}</td>
             <td>{{ supplier.active ? 'Yes' : 'No' }}</td>
             <td>{{ supplier.description }}</td>
+            <td>
+                <a href="{{ path('app_supplier_update', {'id': supplier.id}) }}" class="btn btn-edit">Edit</a>
+                <a href="{{ path('app_supplier_delete', {'id': supplier.id}) }}" class="btn btn-delete" onclick="return confirm('You are about to delete a resource. This action is irreversible')">Delete</a>
+            </td>
         </tr>
         {% else %}
         <tr>
-            <td>No suppliers found</td>
+            <td colspan="7" class="text-center">No suppliers found.</td>
         </tr>
         {% endfor %}
     </tbody>

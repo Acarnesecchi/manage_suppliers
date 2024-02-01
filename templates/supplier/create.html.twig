@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create New Supplier{% endblock %}
+{% block title %}Add a new supplier{% endblock %}
 
 {% block body %}
-    <h1>Create New Supplier</h1>
+    <h1>Add a new supplier</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button class="btn">Save</button>
+        <button class="btn btn-back">Save</button>
     {{ form_end(form) }}
 {% endblock %}
