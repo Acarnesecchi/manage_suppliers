@@ -20,4 +20,4 @@ app_supplier_update:
 app_supplier_delete:
     path: /supplier/delete/{id}
     controller: App\Controller\SupplierController::delete
-    methods: [GET]
+    methods: [POST]
